@@ -1,23 +1,46 @@
-let a1 = [100,112,256,349,770];
-let a2 = [72,86,113,119,265,445,892];
+function mergSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }
 
-
-function searchElemArr (arr1,arr2) {
-  console.log("arr1 => ", arr1);
-  console.log("arr2 => ", arr2);
-
-  let concatArr = [...arr1, ...arr2];
-  let k = +prompt("enter number elem of array:");
-
-  if (k > 0 && k < concatArr.length) {
-    console.log("k => ", k);
-  } else {
-    console.log("number array's elem is not exist");
-    return;
-  }
-  
-  console.log(concatArr.sort((a, b) => a - b));
-  console.log(`${k} elem of array is => ${concatArr[k - 1]}`);
+    const middle =  Math.floor(arr.length / 2);
+    const left = arr.slice(0, middle);
+    const right= arr.slice(middle);
+    console.log('arrLEFT =>', left, 'arrRIGHT =>', right);
+    return merge(mergSort(left),mergSort(right));
 }
 
-searchElemArr(a1,a2);
+function merge(arrL, arrR) {
+    let result = [];
+    let i = 0;
+    let j = 0;
+
+    while (i < arrL.length && j < arrR.length) {
+        if (arrL[i] < arrR[j]) {
+            result.push(arrL[i]);
+            i++;
+        } 
+        else {
+            result.push(arrR[j]);
+            j++;
+        }
+    }
+
+    while (i < arrL.length) {
+        result.push(arrL[i]);
+        i++;
+    }
+    while (j < arrR.length) {
+        result.push(arrR[j]);
+        j++;
+    }
+
+    console.log('RESULT = ', result);
+    return result;
+}
+
+const unsortedArr = [35, -5, 654, 0, 7, -432, 44, 197, 15, -22, -1];
+const sortedArr = mergSort(unsortedArr);
+
+console.log('unsortedArr => ', unsortedArr);
+console.log('sortedArr => ', sortedArr);
