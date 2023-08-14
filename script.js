@@ -1,46 +1,45 @@
-function mergSort(arr) {
-    if (arr.length <= 1) {
-        return arr;
-    }
+// ============ quickSort ============
 
-    const middle =  Math.floor(arr.length / 2);
-    const left = arr.slice(0, middle);
-    const right= arr.slice(middle);
-    console.log('arrLEFT =>', left, 'arrRIGHT =>', right);
-    return merge(mergSort(left),mergSort(right));
+function quickSort2(arr) {
+    console.log('base arr => ', arr);
+    if (arr.length <= 1) return arr;
+    let k = arr[arr.length - 1];
+    let index = 0;
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] < k) {
+        [arr[i], arr[index]] = [arr[index], arr[i]];
+        index++;
+      }
+    }
+    [arr[arr.length - 1], arr[index]] = [arr[index], arr[arr.length - 1]];
+  
+    return [...quickSort2(arr.slice(0, index)), k, ...quickSort2(arr.slice(index + 1))];
 }
+let array2 = [8, 7, 6, 5, 4, 3, 2, 1];
+let array3 = [-8, 47, 61, -15, 0, 42, 3, -2, 1];
+  
+console.log('RESULT ARR2 => ', quickSort2(array2)); 
+console.log('==================');
+console.log('RESULT ARR3 => ', quickSort2(array3)); 
 
-function merge(arrL, arrR) {
-    let result = [];
-    let i = 0;
-    let j = 0;
-
-    while (i < arrL.length && j < arrR.length) {
-        if (arrL[i] < arrR[j]) {
-            result.push(arrL[i]);
-            i++;
-        } 
-        else {
-            result.push(arrR[j]);
-            j++;
-        }
-    }
-
-    while (i < arrL.length) {
-        result.push(arrL[i]);
-        i++;
-    }
-    while (j < arrR.length) {
-        result.push(arrR[j]);
-        j++;
-    }
-
-    console.log('RESULT = ', result);
-    return result;
-}
-
-const unsortedArr = [35, -5, 654, 0, 7, -432, 44, 197, 15, -22, -1];
-const sortedArr = mergSort(unsortedArr);
-
-console.log('unsortedArr => ', unsortedArr);
-console.log('sortedArr => ', sortedArr);
+// ========= сортировка массива ====
+   
+// function sort(A) {
+//     let zeros = 0;
+//     for (let value of A) {
+//       if (value === 0) {
+//         zeros++;
+//       }
+//     }
+//     let k = 0;
+//     while (zeros-- !== 0) {
+//       A[k++] = 0;
+//     }
+//     while (k < A.length) {
+//       A[k++] = 1;
+//     }
+//   }
+  
+//   let array = [0, 0, 1, 1, 1, 0, 1, 0, 1, 1];
+//   sort(array);
+//   console.log(array);
