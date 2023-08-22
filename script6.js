@@ -1,4 +1,3 @@
-// ============ quickSort ============
 
 function dictionary(text) {
   let array = text.toLowerCase().match(/[a-z]/g);
